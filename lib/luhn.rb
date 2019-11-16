@@ -1,7 +1,6 @@
 module Luhn
   def self.is_valid?(number)
-    #break credit card into individual digits
-    #double every other digit
+  
     nums = []
     digits = number.to_s.split('').map(&:to_i) 
     digits.reverse.each_with_index do |x, y|
