@@ -1,27 +1,21 @@
 module Luhn
   def self.is_valid?(number)
-  
-    nums = []
-    digits = number.to_s.split('').map(&:to_i) 
-    digits.reverse.each_with_index do |x, y|
-      if y % 2 == 0
-        double_val = x * 2
-        nums.push(double_val) 
-      else
-        nums.push(x)
+    digits = number.to_s.split('').map(&:to_i)
+    num = digits.reverse
+    num1 = num.map.with_index do |x, y|
+      if y.odd?
+        x *= 2
+        if x >= 10
+          x -= 9
+        end
       end
+      x
     end
-    
-    
-    nums.map do |i|
-      if i >= 10
-        i - 9
-      end
+    sum = num1.inject(:+)
+    if sum % 10 == 0
+      return true
+    else
+      return false
     end
-
-    
-    sum = nums.inject(:+)
-    
-    return sum % 10 == 0
   end
 end
